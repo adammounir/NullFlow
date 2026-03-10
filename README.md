@@ -62,7 +62,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/anonymous-nullflow/NullFlow.git
+git clone https://github.com/adammounir/NullFlow.git
 cd NullFlow
 
 # Create a virtual environment
@@ -206,7 +206,7 @@ NullFlow/
 @inproceedings{nullflow2026,
   title     = {NullFlow: Task-Free Continual Learning via Null-Space
                Constrained Latent Flow Matching},
-  author    = {Anonymous},
+  author    = {Adam Mounir},
   booktitle = {CVPR Workshop on Continual Learning in Computer Vision
                (CLVISION)},
   year      = {2026}
