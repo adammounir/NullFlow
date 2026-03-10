@@ -269,7 +269,7 @@ On TinyImageNet, \ours{} achieves \textbf{60.77\%} AA with only \textbf{9.66\%} 
 
 \subsection{Ablation Study}
 
-Table~\ref{tab:ablation} isolates the contribution of each \ours{} component on Split-CIFAR-100.
+Table~\ref{tab:ablation} isolates the contribution of each \ours{} component on Split-CIFAR-100 (seed~42; the full \ours{} value of 30.62\% corresponds to the seed-42 run in Table~\ref{tab:cifar100}, where the 3-seed mean is 30.21\%).
 
 \begin{table}[t]
 \centering
@@ -294,7 +294,7 @@ Key findings:
 \begin{itemize}[leftmargin=*,itemsep=2pt]
   \item \textbf{FM augmentation} is the most impactful single component (+5.80~pp AA). Generative replay during Wake provides the classifier with diverse training signal from old classes.
   \item \textbf{NSP} contributes +3.15~pp AA and helps stabilize old-task accuracy through gradient projection.
-  \item \textbf{Herding buffer} (v5c vs.\ v5b) adds +5.80~pp, confirming that exemplar quality significantly impacts replay effectiveness.
+  \item \textbf{Herding buffer} contributes +0.71~pp over random selection in isolation (NSP-only without herding: 24.11\% $\to$ v5b with herding: 24.82\%), with substantially larger benefits when combined with FM augmentation (+5.80~pp of the v5c gain comes from adding FM on top of NSP+herding).
   \item \textbf{Removing both FM and NSP} (baseline) causes forgetting to spike to 46.46\% ($+$18.78~pp), demonstrating the synergy between components.
 \end{itemize}
 
@@ -312,7 +312,7 @@ Key findings:
 
 \subsection{Accuracy Evolution Across Tasks}
 
-Figure~\ref{fig:task_evolution} shows per-task accuracy evolution as new tasks are learned. \ours{} maintains substantially higher accuracy on early tasks compared to baselines, with a gradual decay consistent with the 27.68\% forgetting rate. Critically, absolute accuracy remains well above all baselines even for the most forgotten tasks.
+Figure~\ref{fig:task_evolution} shows per-task accuracy evolution as new tasks are learned. \ours{} maintains substantially higher accuracy on early tasks compared to baselines, with a gradual decay consistent with the 28.34\% mean forgetting rate (Table~\ref{tab:cifar100}). Critically, absolute accuracy remains well above all baselines even for the most forgotten tasks.
 
 \begin{figure}[t]
   \centering
