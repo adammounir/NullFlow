@@ -204,11 +204,11 @@ NullFlow/
 
 ```bibtex
 @inproceedings{nullflow2026,
-  title     = {NullFlow: Task-Free Continual Learning via Null-Space
-               Constrained Latent Flow Matching},
+  title     = {NullFlow: Continual Learning via Null-Space Constrained
+               Latent Flow Matching with Wake-Sleep Consolidation},
   author    = {Adam Mounir},
-  booktitle = {CVPR Workshop on Continual Learning in Computer Vision
-               (CLVISION)},
+  booktitle = {CVPR 2026 Workshop on Rediscovering Intelligence:
+               Can AI Still Learn from Humans? (ReLearn)},
   year      = {2026}
 }
 ```
