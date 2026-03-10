@@ -1,0 +1,37 @@
+# =============================================================================
+# NullFlow Configuration — Split-TinyImageNet
+# =============================================================================
+
+benchmark: "split_tinyimagenet"
+num_tasks: 10
+classes_per_task: 20
+image_size: 64
+latent_dim: 256
+
+# Encoder
+encoder_type: "resnet"
+
+# Bigger model for higher-res images
+flow_hidden_dim: 512
+classifier_hidden_dim: 512
+
+# Latent replay buffer
+buffer_per_class: 100
+buffer_max_total: 10000
+
+# ODE solver
+ode_solver: "heun"
+num_ode_steps: 4
+
+# Dataset specifics
+dataset_root: "data/"
+normalize_mean: [0.4802, 0.4481, 0.3975]
+normalize_std: [0.2770, 0.2691, 0.2821]
+
+# Slightly more training budget
+fm_epochs_per_task: 60
+wake_epochs_per_task: 8
+rem_epochs: 25
+
+# Output
+output_dir: "results/split_tinyimagenet/"

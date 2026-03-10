@@ -1,0 +1,33 @@
+# =============================================================================
+# NullFlow Configuration — CORe50
+# =============================================================================
+# NOTE: CORe50 support is experimental. Requires manual dataset download.
+# See: https://vlomonaco.github.io/core50/
+
+benchmark: "core50"
+num_tasks: 10          # NC scenario: 10 sessions
+classes_per_task: 5    # 50 classes total, 5 new per session
+image_size: 128
+latent_dim: 256
+
+# Encoder
+encoder_type: "resnet"
+
+# Dataset specifics
+dataset_root: "data/core50/"
+scenario: "nc"   # "nc" (New Classes) or "ni" (New Instances)
+
+# Larger model
+flow_hidden_dim: 512
+classifier_hidden_dim: 512
+
+# Latent replay buffer
+buffer_per_class: 100
+buffer_max_total: 10000
+
+# ODE solver
+ode_solver: "heun"
+num_ode_steps: 4
+
+# Output
+output_dir: "results/core50/"

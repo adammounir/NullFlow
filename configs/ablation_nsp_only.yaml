@@ -1,0 +1,81 @@
+# =============================================================================
+# ABLATION: NSP Only (no FM augmentation) — Small Buffer (20/class)
+# =============================================================================
+# NSP active (rank=200, alpha=1.0) to protect past-task gradients.
+# No FM augmentation — pure buffer replay + NSP.
+
+benchmark: "split_cifar100"
+num_tasks: 10
+classes_per_task: 10
+image_size: 32
+latent_dim: 512
+
+# --- Encoder ---
+encoder_type: "resnet"
+use_raw_features: true
+
+# --- Classifier ---
+classifier_hidden_dim: 512
+use_cosine_classifier: false
+
+# --- Latent Replay Buffer (SMALL — realistic CL setting) ---
+buffer_per_class: 20
+buffer_max_total: 5000
+
+# --- Flow Matching (NREM) ---
+ode_solver: "heun"
+num_ode_steps: 6
+fm_epochs_per_task: 50
+fm_lr: 0.0005
+fm_batch_size: 128
+
+# --- Data ---
+dataset_root: "data/"
+normalize_mean: [0.5071, 0.4867, 0.4408]
+normalize_std: [0.2675, 0.2565, 0.2761]
+
+# --- Null-Space Projection — ACTIVE ---
+nsp_rank: 200
+nsp_alpha: 1.0
+
+# --- Wake Phase ---
+wake_epochs_per_task: 25
+wake_lr: 0.001
+wake_batch_size: 64
+wake_replay_weight: 1.0
+wake_kd_weight: 0.5
+wake_replay_ratio: 3.0
+wake_weight_decay: 0.0001
+use_balanced_replay: false
+
+# --- FM Augmentation — DISABLED ---
+fm_augment_wake: false
+fm_samples_per_class: 0
+
+# --- Sleep-REM (buffer-only, no FM) ---
+use_bft: false
+rem_epochs: 35
+rem_lr: 0.0004
+rem_use_buffer: true
+replay_per_class: 0
+kd_temperature: 3.0
+kd_weight: 1.5
+ce_replay_weight: 1.5
+
+# --- Regularisation ---
+label_smoothing: 0.0
+grad_clip_norm: 0.0
+
+# --- Plasticity Improvements ---
+latent_noise_std: 0.1
+use_weight_align: true
+use_proto_init: false
+
+# --- LR Scheduling ---
+use_cosine_schedule: true
+
+# --- Final Consolidation ---
+final_consolidation_epochs: 0
+
+# --- Output ---
+output_dir: "results/split_cifar100/"

@@ -1,0 +1,60 @@
+# =============================================================================
+# NullFlow Default Configuration
+# =============================================================================
+
+# --- Encoder ---
+encoder_type: "resnet"          # "resnet" (ImageNet, no leakage) or "vae"
+
+# --- Model Architecture ---
+latent_dim: 128
+flow_hidden_dim: 512
+flow_num_layers: 3
+classifier_hidden_dim: 256
+num_classes_max: 200
+
+# --- Flow Matching ---
+num_ode_steps: 4
+ode_solver: "heun"              # "euler" (1st order) or "heun" (2nd order)
+fm_epochs_per_task: 50
+fm_lr: 5.0e-4
+fm_batch_size: 128
+
+# --- Latent Replay Buffer (prevents FM forgetting) ---
+buffer_per_class: 100           # max exemplars stored per class
+buffer_max_total: 10000         # hard cap on total buffer size
+
+# --- Null-Space Projection ---
+nsp_rank: 64
+nsp_num_projections: 128  # 2 * rank
+nsp_num_samples: 500       # samples for Jacobian basis estimation
+
+# --- Drift Detection (Page-Hinkley) ---
+drift_delta: 0.005
+drift_threshold: 50
+drift_warmup: 100
+
+# --- Knowledge Distillation ---
+kd_temperature: 2.0
+kd_weight: 1.0
+ce_replay_weight: 0.1
+
+# --- Wake Phase ---
+wake_lr: 1.0e-3
+wake_epochs_per_task: 5
+wake_batch_size: 64
+
+# --- Sleep-REM ---
+rem_epochs: 20
+replay_per_class: 50
+
+# --- General ---
+seed: 42
+device: "cuda"
+num_workers: 4
+output_dir: "results/"
+
+# --- Benchmark (overridden by specific configs) ---
+benchmark: "split_cifar100"
+num_tasks: 10
+classes_per_task: 10
+image_size: 32

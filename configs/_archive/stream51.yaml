@@ -1,0 +1,32 @@
+# =============================================================================
+# NullFlow Configuration — Stream-51
+# =============================================================================
+# NOTE: Stream-51 support is experimental. Requires manual dataset download.
+# See: https://github.com/tyler-hayes/Stream-51
+
+benchmark: "stream51"
+num_tasks: 10
+classes_per_task: 5    # 51 classes total
+image_size: 224
+latent_dim: 256
+
+# Encoder
+encoder_type: "resnet"
+
+# Dataset specifics
+dataset_root: "data/stream51/"
+
+# Larger model
+flow_hidden_dim: 512
+classifier_hidden_dim: 512
+
+# Latent replay buffer
+buffer_per_class: 100
+buffer_max_total: 10000
+
+# ODE solver
+ode_solver: "heun"
+num_ode_steps: 4
+
+# Output
+output_dir: "results/stream51/"

@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PyTorch model checkpoints (large files — download via torchvision or train)
+*.pt
+*.pth
+*.ckpt
+
+# Data (downloaded datasets — too large for git)
+data/
+
+# Intermediate/dev result directories (not referenced in paper)
+results/split_cifar100/raw512*/
+results/split_cifar100/latent512/
+results/split_cifar100/combined_v*/
+results/split_cifar100/pure100/
+results/split_cifar100/arch_v*/
+results/split_cifar100/plasticity_v*/
+results/split_cifar100/plasticity_fix/
+results/split_cifar100/plastic_wake_wa/
+results/split_cifar100/noise*/
+results/split_cifar100/nofm_bufonly/
+results/split_cifar100/masking_only/
+results/split_cifar100/eval_mask_only/
+results/split_cifar100/joint_retrain*/
+results/split_cifar100/pastonly_kd/
+results/split_cifar100/trainmask_pastkd/
+results/split_cifar100/baselines/
+results/split_cifar100/baselines_seed42/
+results/split_cifar100/ablation_nullflow_v2*/
+results/split_cifar100/ablation_nullflow_v3/
+results/split_cifar100/ablation_nullflow_v4/
+results/split_cifar100/ablation_nullflow/
+
+# Original paper assets (figures are in paper/figures/)
+paper_assets/
+
+# Run logs
+results/**/*.log
+results/**/train.log
+
+# TensorBoard
+runs/
+tb_logs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# pytest
+.pytest_cache/
+
+# Shell scripts (development)
+run*.sh
+
+# LaTeX auxiliary files
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.blg
+paper/*.bbl
+paper/*.synctex.gz
