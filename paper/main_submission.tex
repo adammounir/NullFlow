@@ -21,6 +21,7 @@
 \usepackage{subcaption}
 \usepackage{enumitem}
 \usepackage{nicefrac}
+\usepackage{placeins}  % \FloatBarrier to prevent float pile-up
 
 % --- Colors for tables ---
 \definecolor{bestcolor}{HTML}{2E86C1}
@@ -207,7 +208,7 @@ We report three standard CL metrics computed from the accuracy matrix $R \in \ma
 
 Table~\ref{tab:cifar100} presents results on Split-CIFAR-100 averaged over 3 random seeds (42, 123, 456).
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{Split-CIFAR-100 results (10 tasks $\times$ 10 classes). Buffer: 20/class. Mean$\pm$std over 3 seeds. $\uparrow$: higher is better; $\downarrow$: lower is better.}
 \label{tab:cifar100}
@@ -235,11 +236,12 @@ Joint Training       & 16.97$\pm$0.78 & 0.00              & 0.00 \\
 
 The forgetting rate of \ours{} (28.34\%) is higher than iCaRL (8.83\%) and NCM (9.50\%), but these methods achieve much lower absolute accuracy. The key insight is that \ours{} learns substantially more per task (first-task accuracy $>$75\%), so the absolute retained knowledge $R_{T,j}$ is still much higher despite greater relative forgetting. All methods are evaluated with identical output masking (restricting predictions to seen classes only) for fair comparison.
 
+\FloatBarrier
 \subsection{Split-TinyImageNet}
 
 Table~\ref{tab:tinyimagenet} presents results on the more challenging Split-TinyImageNet benchmark (seed 42).
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{Split-TinyImageNet results (10 tasks $\times$ 20 classes, 200 total). Buffer: 20/class. Seed 42.}
 \label{tab:tinyimagenet}
@@ -267,11 +269,12 @@ On TinyImageNet, \ours{} achieves \textbf{60.77\%} AA with only \textbf{9.66\%} 
 
 \textbf{Note on TinyImageNet:} TinyImageNet is a subset of ImageNet, and our frozen ResNet-18 encoder is pretrained on ImageNet. This encoder overlap is standard practice in frozen-feature CL research~\cite{zhou2024revisiting,janson2022simple} and affects all methods equally (including baselines). We include this benchmark for comparability with the literature, noting that CIFAR-100 (no image-level overlap with ImageNet) serves as the cleaner evaluation.
 
+\FloatBarrier
 \subsection{Ablation Study}
 
 Table~\ref{tab:ablation} isolates the contribution of each \ours{} component on Split-CIFAR-100 (seed~42; the full \ours{} value of 30.62\% corresponds to the seed-42 run in Table~\ref{tab:cifar100}, where the 3-seed mean is 30.21\%).
 
-\begin{table}[t]
+\begin{table}[htbp]
 \centering
 \caption{Ablation study on Split-CIFAR-100 (seed 42). Removing components from the full \ours{} system.}
 \label{tab:ablation}
@@ -298,7 +301,7 @@ Key findings:
   \item \textbf{Removing both FM and NSP} (baseline) causes forgetting to spike to 46.46\% ($+$18.78~pp), demonstrating the synergy between components.
 \end{itemize}
 
-\begin{figure}[t]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/cifar100/ablation_study.pdf}
   \caption{Ablation study on Split-CIFAR-100. Average accuracy and forgetting rate for each variant, showing the complementary contribution of FM augmentation, NSP, and herding.}
@@ -314,7 +317,7 @@ Key findings:
 
 Figure~\ref{fig:task_evolution} shows per-task accuracy evolution as new tasks are learned. \ours{} maintains substantially higher accuracy on early tasks compared to baselines, with a gradual decay consistent with the 28.34\% mean forgetting rate (Table~\ref{tab:cifar100}). Critically, absolute accuracy remains well above all baselines even for the most forgotten tasks.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/cifar100/task_evolution.pdf}
   \caption{Task accuracy evolution on Split-CIFAR-100. \ours{} maintains higher absolute accuracy across all tasks compared to baselines.}
@@ -325,7 +328,7 @@ Figure~\ref{fig:task_evolution} shows per-task accuracy evolution as new tasks a
 
 Figure~\ref{fig:accuracy_matrix} visualizes the full accuracy matrix $R_{i,j}$ for \ours{} on both benchmarks. The diagonal dominance pattern with gradual off-diagonal decay confirms effective but imperfect knowledge retention.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
   \centering
   \begin{subfigure}[t]{0.48\linewidth}
     \includegraphics[width=\linewidth]{figures/cifar100/accuracy_matrix.pdf}
@@ -344,7 +347,7 @@ Figure~\ref{fig:accuracy_matrix} visualizes the full accuracy matrix $R_{i,j}$ f
 
 Figure~\ref{fig:baseline} provides a visual comparison of average accuracy across all methods on both benchmarks, highlighting the substantial gap between \ours{} and all baselines.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
   \centering
   \begin{subfigure}[t]{0.48\linewidth}
     \includegraphics[width=\linewidth]{figures/cifar100/baseline_comparison.pdf}
@@ -363,7 +366,7 @@ Figure~\ref{fig:baseline} provides a visual comparison of average accuracy acros
 
 Figure~\ref{fig:multiseed} demonstrates the consistency of \ours{} across random seeds (42, 123, 456) on CIFAR-100, with a standard deviation of only 0.36\%, indicating robust performance.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/cifar100/multiseed_comparison.pdf}
   \caption{Multi-seed comparison on Split-CIFAR-100 (seeds 42, 123, 456). Shaded area: $\pm$1 std.}
@@ -374,7 +377,7 @@ Figure~\ref{fig:multiseed} demonstrates the consistency of \ours{} across random
 
 Figure~\ref{fig:forgetting} details per-task forgetting patterns. \ours{} shows uniform forgetting across tasks, whereas baseline methods exhibit catastrophic collapse on early tasks.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{figures/cifar100/forgetting_analysis.pdf}
   \caption{Per-task forgetting analysis on Split-CIFAR-100.}
